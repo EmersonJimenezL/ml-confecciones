@@ -6,8 +6,8 @@ import {
   ManyToMany,
   JoinTable,
 } from 'typeorm';
-import { Usuario } from '../usuario/entities/usuario.entity';
-import { Producto } from '../producto/entities/producto.entity';
+import { Usuario } from '../../usuario/entities/usuario.entity';
+import { Producto } from '../../producto/entities/producto.entity';
 
 @Entity()
 export class Pedido {

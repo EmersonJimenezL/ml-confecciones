@@ -1,34 +1,36 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { ProveedorService } from './proveedor.service';
 import { CreateProveedorDto } from './dto/create-proveedor.dto';
 import { UpdateProveedorDto } from './dto/update-proveedor.dto';
 
-@Controller('proveedor')
+@Controller('proveedores')
 export class ProveedorController {
   constructor(private readonly proveedorService: ProveedorService) {}
 
-  @Post()
-  create(@Body() createProveedorDto: CreateProveedorDto) {
-    return this.proveedorService.create(createProveedorDto);
-  }
-
   @Get()
-  findAll() {
+  async findAll() {
     return this.proveedorService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.proveedorService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const supplier = await this.proveedorService.findOne(+id);
+    return supplier !== undefined ? supplier : null;
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProveedorDto: UpdateProveedorDto) {
-    return this.proveedorService.update(+id, updateProveedorDto);
+  @Post()
+  async create(@Body() createProveedorDto: CreateProveedorDto) {
+    return this.proveedorService.create(createProveedorDto);
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() updateProveedorDto: UpdateProveedorDto) {
+    const updatedSupplier = await this.proveedorService.update(+id, updateProveedorDto);
+    return updatedSupplier !== undefined ? updatedSupplier : null;
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.proveedorService.remove(+id);
   }
 }

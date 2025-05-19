@@ -1,35 +1,42 @@
-import { IsNumber, IsString, IsDateString, IsOptional } from 'class-validator';
+import {
+  IsNumber,
+  IsString,
+  IsDateString,
+  IsOptional,
+  IsArray,
+} from 'class-validator';
 
 export class UpdatePedidoDto {
   @IsNumber()
   @IsOptional()
-  usuarioId?: number | null;
+  usuarioId?: number;
 
   @IsString()
   @IsOptional()
-  tipo?: string | null;
+  tipo?: string;
 
   @IsString()
   @IsOptional()
-  estado?: string | null;
+  estado?: string;
 
   @IsDateString()
   @IsOptional()
-  fecha?: string | null; //  o Date
+  fecha?: string; //  o Date
 
   @IsString()
   @IsOptional()
-  instrucciones?: string | null;
+  instrucciones?: string;
 
   @IsString()
   @IsOptional()
-  archivoAdjunto?: string | null;
+  archivoAdjunto?: string;
 
   @IsNumber()
   @IsOptional()
-  total?: number | null;
+  total?: number;
 
-  @IsNumber({ each: true })
+  @IsArray() // Indica que la propiedad es un arreglo
+  @IsNumber({}, { each: true }) // Valida que cada elemento del arreglo sea un número
   @IsOptional()
-  productosIds?: number[] | null;
+  productosIds?: number[];
 }

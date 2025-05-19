@@ -4,6 +4,7 @@ import {
   IsDateString,
   IsOptional,
   IsNotEmpty,
+  IsArray,
 } from 'class-validator';
 
 export class CreatePedidoDto {
@@ -35,7 +36,8 @@ export class CreatePedidoDto {
   @IsNotEmpty()
   total: number;
 
-  @IsNumber({ each: true })
+  @IsArray()
+  @IsNumber({}, { each: true })
   @IsOptional()
   productosIds?: number[] | null;
 }

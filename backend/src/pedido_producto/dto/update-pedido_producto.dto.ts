@@ -1,4 +1,23 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreatePedidoProductoDto } from './create-pedido_producto.dto';
+import { IsNumber, IsOptional } from 'class-validator';
 
-export class UpdatePedidoProductoDto extends PartialType(CreatePedidoProductoDto) {}
+export class UpdatePedidoProductoDto {
+  @IsNumber()
+  @IsOptional()
+  pedidoId?: number;
+
+  @IsNumber()
+  @IsOptional()
+  productoId?: number;
+
+  @IsNumber()
+  @IsOptional()
+  cantidad?: number;
+
+  @IsNumber()
+  @IsOptional()
+  precioUnitario?: number;
+
+  @IsNumber()
+  @IsOptional()
+  descuento?: number;
+}

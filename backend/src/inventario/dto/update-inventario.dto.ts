@@ -1,4 +1,15 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateInventarioDto } from './create-inventario.dto';
+import { IsNumber, IsOptional } from 'class-validator';
 
-export class UpdateInventarioDto extends PartialType(CreateInventarioDto) {}
+export class UpdateInventarioDto {
+  @IsNumber()
+  @IsOptional()
+  insumoId?: number;
+
+  @IsNumber()
+  @IsOptional()
+  stock?: number;
+
+  @IsNumber()
+  @IsOptional()
+  stockMinimo?: number;
+}

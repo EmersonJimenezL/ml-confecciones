@@ -1,33 +1,33 @@
-import { IsString, IsEmail, IsOptional, Length } from 'class-validator';
+import { IsString, IsOptional, IsEmail, Length } from 'class-validator';
 
 export class UpdateUsuarioDto {
   @IsString()
   @IsOptional()
-  @Length({ min: 1, max: 20 })
-  rut?: string | null;
+  @Length(1, 20) // Correcto: pasando directamente los números
+  rut?: string;
 
   @IsString()
   @IsOptional()
-  @Length({ min: 1, max: 255 })
-  name?: string | null;
+  @Length(1, 255) // Correcto: pasando directamente los números
+  name?: string;
 
   @IsString()
   @IsOptional()
-  @Length({ min: 1, max: 255 })
-  apellido?: string | null;
+  @Length(1, 255) // Correcto: pasando directamente los números
+  apellido?: string;
 
   @IsEmail()
   @IsOptional()
-  @Length({ min: 1, max: 255 })
-  email?: string | null;
+  @Length(1, 255) // Correcto: pasando directamente los números
+  email?: string;
 
   @IsString()
   @IsOptional()
-  @Length({ min: 8 })
-  contrasenna?: string | null;
+  @Length(8, undefined) // Correcto: pasando directamente los números (sin máximo)
+  contrasena?: string;
 
   @IsString()
   @IsOptional()
-  @Length({ min: 1, max: 50 })
-  rol?: string | null;
+  @Length(1, 50) // Correcto: pasando directamente los números
+  rol?: string;
 }

@@ -1,34 +1,36 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { InsumoService } from './insumo.service';
 import { CreateInsumoDto } from './dto/create-insumo.dto';
 import { UpdateInsumoDto } from './dto/update-insumo.dto';
 
-@Controller('insumo')
+@Controller('insumos')
 export class InsumoController {
   constructor(private readonly insumoService: InsumoService) {}
 
-  @Post()
-  create(@Body() createInsumoDto: CreateInsumoDto) {
-    return this.insumoService.create(createInsumoDto);
-  }
-
   @Get()
-  findAll() {
+  async findAll() {
     return this.insumoService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.insumoService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const material = await this.insumoService.findOne(+id);
+    return material !== undefined ? material : null;
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateInsumoDto: UpdateInsumoDto) {
-    return this.insumoService.update(+id, updateInsumoDto);
+  @Post()
+  async create(@Body() createInsumoDto: CreateInsumoDto) {
+    return this.insumoService.create(createInsumoDto);
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() updateInsumoDto: UpdateInsumoDto) {
+    const updatedMaterial = await this.insumoService.update(+id, updateInsumoDto);
+    return updatedMaterial !== undefined ? updatedMaterial : null;
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.insumoService.remove(+id);
   }
 }
