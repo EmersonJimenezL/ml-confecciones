@@ -1,12 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { Insumo } from '../insumo/entities/insumo.entity';
+import { Insumo } from '../../insumo/entities/insumo.entity';
 
 @Entity()
 export class Inventario {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Insumo, insumo => insumo.inventarios)
+  @ManyToOne(() => Insumo, (insumo) => insumo.inventarios)
   insumo: Insumo;
 
   @Column({ type: 'int', nullable: false })
