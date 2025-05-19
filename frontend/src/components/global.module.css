@@ -1,0 +1,77 @@
+.container {
+  background-color: #0c0c0c;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+}
+
+.boxFormat {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.boxContent {
+  display: flex;
+  color: black;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  padding: 2rem;
+  width: 400px;
+  height: 400px;
+  box-shadow: 0 0 20px rgba(179, 178, 178, 0.5);
+  border-radius: 5px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.buttonStyle {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem;
+  cursor: pointer;
+  margin: 0 1.2rem;
+  font-size: 1rem;
+}
+
+.buttonStyle:hover {
+  background-color: #0c0c0c;
+  color: white;
+  scale: 1.05;
+  transition: all 0.3s ease-in-out;
+}
+
+.inputForm {
+  color: black;
+  background: none;
+  border: none;
+  padding: 0.4rem;
+  border-bottom: 2px solid black;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  outline: none;
+}
+
+.inputForm:hover {
+  border-bottom: 2px solid black;
+  scale: 1.1;
+  transition: all 0.3s ease-in-out;
+}
+
+.titleWelcome {
+  font-size: 3.5rem;
+  font-weight: 600;
+}

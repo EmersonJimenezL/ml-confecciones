@@ -1,0 +1,43 @@
+.divprin {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-image: url("/banner.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-x: hidden;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.box_title {
+  position: fixed;
+  top: 15%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-family: "Tinos";
+  font-weight: bold;
+  font-size: 100px;
+  color: white;
+  letter-spacing: 10px;
+}
+
+.subtitle {
+  font-family: "tinos";
+  font-size: 50px;
+  color: white;
+  letter-spacing: 10px;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 50px;
+  }
+  .subtitle {
+    font-size: 20px;
+  }
+}

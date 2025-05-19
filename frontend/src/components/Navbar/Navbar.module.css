@@ -1,0 +1,25 @@
+.navLogo {
+  border-radius: 50%;
+}
+
+.button {
+  font-family: "tinos";
+  letter-spacing: 1px;
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 4px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+.button:hover {
+  background-color: beige;
+  color: black;
+  scale: 1.05;
+  transition: all 0.2s;
+}
