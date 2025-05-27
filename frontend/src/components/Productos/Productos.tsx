@@ -1,11 +1,22 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 interface Producto {
   id: number;
   nombre: string;
+  descripcion: string;
   precio: number;
-  // Agrega otras propiedades de tu producto aquí
+  imagen: string;
+  stock: number;
+  categoria: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export const Productos = () => {
@@ -18,9 +29,13 @@ export const Productos = () => {
       try {
         const res = await fetch("http://localhost:3000/productos"); // Reemplaza con la URL correcta
         if (!res.ok) {
+          console.log(res);
+
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         const data: Producto[] = await res.json(); // Afirmamos el tipo de los datos recibidos
+        console.log("respuesta del backend", data);
+
         setProductos(data);
         setIsLoading(false);
       } catch (err) {
@@ -46,16 +61,31 @@ export const Productos = () => {
   }
 
   return (
-    <div>
-      <h1>Lista de Productos</h1>
-      <ul>
+    <div style={{ width: "100vh" }}>
+      <div style={{ display: "flex", flexDirection: "row", gap: 10 }}>
         {productos.map((producto) => (
-          <li key={producto.id}>
-            {producto.nombre} - Precio: ${producto.precio}
-            {/* Puedes mostrar más detalles del producto aquí */}
-          </li>
+          <Card key={producto.id}>
+            <CardMedia
+              component="img"
+              alt="green iguana"
+              height="140"
+              image="/static/images/cards/contemplative-reptile.jpg"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {producto.nombre}
+              </Typography>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                {producto.descripcion}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small">Share</Button>
+              <Button size="small">Learn More</Button>
+            </CardActions>
+          </Card>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

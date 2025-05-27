@@ -1,37 +1,29 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ProductoModule } from './producto/producto.module';
-import { PedidoModule } from './pedido/pedido.module';
-import { InsumoModule } from './insumo/insumo.module';
-import { ProveedorModule } from './proveedor/proveedor.module';
-import { CompraModule } from './compra/compra.module';
-import { InventarioModule } from './inventario/inventario.module';
-import { PedidoProductoModule } from './pedido_producto/pedido_producto.module';
-import { UsuarioModule } from './usuario/usuario.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ProductosModule } from './productos/productos.module';
+
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '##mlc.2025**',
-      database: 'ml_confecciones',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true, // ¡CUIDADO! Solo para desarrollo
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
-    UsuarioModule,
-    ProductoModule,
-    PedidoModule,
-    InsumoModule,
-    ProveedorModule,
-    CompraModule,
-    InventarioModule,
-    PedidoProductoModule,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'mysql',
+        host: configService.get('DB_HOST'),
+        port: configService.get('DB_PORT'),
+        username: configService.get('DB_USERNAME'),
+        password: configService.get('DB_PASSWORD'),
+        database: configService.get('DB_DATABASE'),
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        synchronize: process.env.NODE_ENV !== 'production', // Solo para desarrollo
+      }),
+      inject: [ConfigService],
+    }),
+    ProductosModule,
+    // Otros módulos...
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
