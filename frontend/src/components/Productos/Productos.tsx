@@ -6,11 +6,15 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import CardActionArea from "@mui/material/CardActionArea";
+import { red } from "@mui/material/colors";
+import { BorderBottom } from "@mui/icons-material";
 
 interface Producto {
   id: number;
   nombre: string;
   descripcion: string;
+  talla: string;
   precio: number;
   imagen: string;
   stock: number;
@@ -29,8 +33,6 @@ export const Productos = () => {
       try {
         const res = await fetch("http://localhost:3000/productos"); // Reemplaza con la URL correcta
         if (!res.ok) {
-          console.log(res);
-
           throw new Error(`HTTP error! status: ${res.status}`);
         }
         const data: Producto[] = await res.json(); // Afirmamos el tipo de los datos recibidos
@@ -61,27 +63,70 @@ export const Productos = () => {
   }
 
   return (
-    <div style={{ width: "100vh" }}>
-      <div style={{ display: "flex", flexDirection: "row", gap: 10 }}>
+    <div style={{ width: "100%" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          gap: 30,
+          flexWrap: "wrap",
+          justifyContent: "center",
+          padding: "60px",
+        }}
+      >
         {productos.map((producto) => (
-          <Card key={producto.id}>
-            <CardMedia
-              component="img"
-              alt="green iguana"
-              height="140"
-              image="/static/images/cards/contemplative-reptile.jpg"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {producto.nombre}
-              </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                {producto.descripcion}
-              </Typography>
-            </CardContent>
+          <Card
+            sx={{
+              maxWidth: 345,
+              backgroundColor: "secondary.main",
+              borderRadius: 2,
+            }}
+            key={producto.id}
+          >
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="140"
+                image={producto.imagen}
+                alt="Error al cargar la imagen"
+              />
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  color="primary"
+                >
+                  {producto.nombre}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="primary"
+                  sx={{ paddingBottom: 1, borderBottom: 1 }}
+                >
+                  {producto.descripcion}
+                </Typography>
+                <Typography variant="body2" color="primary">
+                  <strong>Talla: </strong>
+                  {producto.talla}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
             <CardActions>
-              <Button size="small">Share</Button>
-              <Button size="small">Learn More</Button>
+              <Button
+                size="small"
+                color="primary"
+                sx={{
+                  backgroundColor: "gray",
+                  borderRadius: 3,
+                  "&:hover": {
+                    cursor: "pointer",
+                    transform: "scale(1.1)",
+                  },
+                }}
+              >
+                Agregar al carrito
+              </Button>
             </CardActions>
           </Card>
         ))}

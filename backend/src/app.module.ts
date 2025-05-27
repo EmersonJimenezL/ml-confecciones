@@ -18,7 +18,7 @@ import { ProductosModule } from './productos/productos.module';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: process.env.NODE_ENV !== 'production', // Solo para desarrollo
+        synchronize: true,
       }),
       inject: [ConfigService],
     }),

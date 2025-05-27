@@ -1,10 +1,10 @@
-import { Navbar } from "@/components";
+// import { Navbar } from "@/components";
 import { Banner } from "@/components";
 
 function page() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Banner />
     </>
   );

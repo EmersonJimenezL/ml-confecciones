@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Talla } from '../../common/enums/talla.enum';
 
 @Entity('productos')
 export class Producto {
@@ -10,6 +11,13 @@ export class Producto {
 
   @Column({ type: 'text', nullable: false })
   descripcion: string;
+
+  @Column({
+    type: 'enum',
+    enum: Talla,
+    nullable: true,
+  })
+  talla: Talla | null;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
   precio: number;

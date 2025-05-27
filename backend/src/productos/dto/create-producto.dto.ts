@@ -4,7 +4,9 @@ import {
   IsNotEmpty,
   Min,
   IsPositive,
+  IsEnum,
 } from 'class-validator';
+import { Talla } from '../../common/enums/talla.enum';
 
 export class CreateProductoDto {
   @IsString()
@@ -14,6 +16,10 @@ export class CreateProductoDto {
   @IsString()
   @IsNotEmpty({ message: 'La descripcion es obligatorias' })
   descripcion: string;
+
+  @IsEnum(Talla, { message: 'La talla proporcionada no es valida' })
+  @IsNotEmpty({ message: 'La talla es obligatorias' })
+  talla: Talla;
 
   @IsNumber()
   @IsNotEmpty({ message: 'El precio no puede ser menor a 0' })
